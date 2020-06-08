@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace UdemiyIdentitiy.Context
 {
-    public class UdemiyContext:IdentityDbContext
+    public class UdemiyContext:IdentityDbContext<AppUser,AppRole,int>
     {
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

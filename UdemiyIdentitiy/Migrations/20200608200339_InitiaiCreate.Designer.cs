@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UdemiyIdentitiy.Context;
 
 namespace UdemiyIdentitiy.Migrations
 {
     [DbContext(typeof(UdemiyContext))]
-    partial class UdemiyContextModelSnapshot : ModelSnapshot
+    [Migration("20200608200339_InitiaiCreate")]
+    partial class InitiaiCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
