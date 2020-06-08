@@ -10,6 +10,6 @@ namespace UdemiyIdentitiy.Context
     {
         public string PictureUrl { get; set; }
 
-        public string Cinsiyet { get; set; }
+        public string Gender { get; set; }
     }
 }
