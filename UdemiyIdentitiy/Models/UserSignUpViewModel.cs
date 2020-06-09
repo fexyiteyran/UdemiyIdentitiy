@@ -10,25 +10,35 @@ namespace UdemiyIdentitiy.Models
     {
         [Display(Name = "Kullanıcı Adı")]
         [Required(ErrorMessage = "kullanıcı aı boş geçemez")]
+
         public string UserName { get; set; }
 
         [Display(Name = "Şifre")]
-        [Compare( "Password", ErrorMessage = "Şifre boş geçemez")]
+        [Required(ErrorMessage = "Şifre tekrarı boş geçemez")]
+
+
         public string Password { get; set; }
 
         [Display(Name = "Şifre Tekrarı")]
-        [Required(ErrorMessage = "Şifre tekrarı boş geçemez")]
+        [Compare("Password", ErrorMessage = "parolalar eşleşmiyor")]
+
         public string ConfirmPassword { get; set; }
 
         [Display(Name = "Ad:")]
         [Required(ErrorMessage = "Ad boş geçilemez")]
+
         public string Name { get; set; }
+
         [Display(Name = "Soyad")]
         [Required(ErrorMessage = "Soyad boş geçemez")]
+
         public string SurName { get; set; }
+
+
         [Display(Name = "Email:")]
         [Required(ErrorMessage = "Email boşgeçilemez")]
+
         public string Email { get; set; }
-       
+
     }
 }

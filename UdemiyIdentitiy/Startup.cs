@@ -18,7 +18,15 @@ namespace UdemiyIdentitiy
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<UdemiyContext>();
-            services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<UdemiyContext>();
+            services.AddIdentity<AppUser, AppRole>(opt=> {
+                opt.Password.RequireDigit = false;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequiredLength = 1;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireUppercase = false;
+            
+            
+            }).AddEntityFrameworkStores<UdemiyContext>();
 
              services.AddControllersWithViews();
         }

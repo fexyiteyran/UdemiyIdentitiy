@@ -12,10 +12,11 @@ namespace UdemiyIdentitiy.Controllers
     public class HomeController : Controller
     {
 
-        private readonly UserManager<AppUser> _usermanager;
-        public HomeController(UserManager<AppUser> usermanager)
+        private readonly UserManager<AppUser> _userManager;
+       
+        public HomeController(UserManager<AppUser> userManager)
         {
-            usermanager = _usermanager;
+            _userManager = userManager;
         }
 
 
@@ -49,15 +50,15 @@ namespace UdemiyIdentitiy.Controllers
             {
                 AppUser user = new AppUser
                 {
-                    Email = model.Email,
+             
                     Name=model.Name,
                     SurName=model.SurName,
-                    UserName=model.UserName
-
+                    UserName=model.UserName,
+                    Email = model.Email
                 };
 
-            
-           var result=    await  _usermanager.CreateAsync(user, model.Password);
+                var result = await _userManager.CreateAsync(user, model.Password);
+
 
                 if (result.Succeeded)
                 {
@@ -77,7 +78,11 @@ namespace UdemiyIdentitiy.Controllers
             return View(model);
         }
 
+        public IActionResult kayit()
+        {
 
+            return View();
+        }
 
     }
 }
