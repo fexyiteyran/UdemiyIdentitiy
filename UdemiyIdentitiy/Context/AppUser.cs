@@ -8,6 +8,8 @@ namespace UdemiyIdentitiy.Context
 {
     public class AppUser:IdentityUser<int>
     {
+
+
         public string PictureUrl { get; set; }
 
         public string Gender { get; set; }
