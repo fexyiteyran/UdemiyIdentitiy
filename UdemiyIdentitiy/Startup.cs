@@ -38,7 +38,18 @@ namespace UdemiyIdentitiy
             
             });
 
-             services.AddControllersWithViews();
+            services.ConfigureApplicationCookie(opt => {
+
+                opt.Cookie.HttpOnly = true;
+                opt.Cookie.Name = "besiro";
+                opt.Cookie.SameSite = SameSiteMode.Strict;
+                opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                opt.ExpireTimeSpan = TimeSpan.FromDays(40);
+
+            });
+
+
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
