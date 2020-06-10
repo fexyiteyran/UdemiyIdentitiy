@@ -28,6 +28,16 @@ namespace UdemiyIdentitiy
             
             }).AddEntityFrameworkStores<UdemiyContext>();
 
+            services.ConfigureApplicationCookie(opt => {
+
+                opt.Cookie.HttpOnly = true;
+                opt.Cookie.Name = "UdemiyCookie";
+                opt.Cookie.SameSite = SameSiteMode.Strict;
+                opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                opt.ExpireTimeSpan = TimeSpan.FromDays(20);
+            
+            });
+
              services.AddControllersWithViews();
         }
 
