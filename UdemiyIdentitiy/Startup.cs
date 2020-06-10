@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UdemiyIdentitiy.Context;
+using UdemiyIdentitiy.CustomValidator;
 
 namespace UdemiyIdentitiy
 {
@@ -19,17 +20,17 @@ namespace UdemiyIdentitiy
         {
             services.AddDbContext<UdemiyContext>();
             services.AddIdentity<AppUser, AppRole>(opt=> {
-                opt.Password.RequireDigit = false;
-                opt.Password.RequireLowercase = false;
-                opt.Password.RequiredLength = 1;
-                opt.Password.RequireNonAlphanumeric = false;
-                opt.Password.RequireUppercase = false;
+                //opt.Password.RequireDigit = false;
+                //opt.Password.RequireLowercase = false;
+                //opt.Password.RequiredLength = 1;
+                //opt.Password.RequireNonAlphanumeric = false;
+                //opt.Password.RequireUppercase = false;
 
-                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
-                opt.Lockout.MaxFailedAccessAttempts = 3;
+                //opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+                //opt.Lockout.MaxFailedAccessAttempts = 3;
             
             
-            }).AddEntityFrameworkStores<UdemiyContext>();
+            }).AddErrorDescriber<CustomIdentityValidator>().AddEntityFrameworkStores<UdemiyContext>();
 
             services.ConfigureApplicationCookie(opt => {
 
