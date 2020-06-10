@@ -13,10 +13,12 @@ namespace UdemiyIdentitiy.Controllers
     {
 
         private readonly UserManager<AppUser> _userManager;
-       
-        public HomeController(UserManager<AppUser> userManager)
+        private readonly SignInManager<AppUser> _signInManager;
+        public HomeController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
+
         }
 
 
@@ -24,14 +26,28 @@ namespace UdemiyIdentitiy.Controllers
         {
             return View(new UserSignInViewModel());
         }
-        public IActionResult GirisYap(UserSignInViewModel model)
+        public async Task< IActionResult> GirisYap(UserSignInViewModel model)
         {
 
             if (ModelState.IsValid)
             {
 
-            }
+                //identityResult.IsLockedOut;
+                //identityResult.IsNotAllowed(ikiadılıdoğrulamada kullanılır) gibi durumlar dönebilri
+                var identityResult=   await _signInManager.PasswordSignInAsync(model.UserName,model.Password,false,false);
 
+                if (identityResult.Succeeded)
+                {
+                    return RedirectToAction("Index","Panel");
+                }
+                
+                ModelState.AddModelError("","Kullanıcı adı veya şifre hatalı");
+
+                ;
+
+
+            }
+            
             return View("Index", model);
         }
 
