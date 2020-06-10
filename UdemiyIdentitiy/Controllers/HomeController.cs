@@ -34,7 +34,7 @@ namespace UdemiyIdentitiy.Controllers
 
                 //identityResult.IsLockedOut;
                 //identityResult.IsNotAllowed(ikiadılıdoğrulamada kullanılır) gibi durumlar dönebilri
-                var identityResult=   await _signInManager.PasswordSignInAsync(model.UserName,model.Password,false,false);
+                var identityResult=   await _signInManager.PasswordSignInAsync(model.UserName,model.Password,model.RememberMe,false);
 
                 if (identityResult.Succeeded)
                 {

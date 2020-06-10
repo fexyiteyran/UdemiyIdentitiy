@@ -14,5 +14,7 @@ namespace UdemiyIdentitiy.Models
         [Display(Name = "Şifre")]
         [Required(ErrorMessage = "Şifre alanı boş geçemez")]
         public string Password { get; set; }
+        public bool RememberMe { get; set; }
+
     }
 }
