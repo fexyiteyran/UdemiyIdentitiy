@@ -34,16 +34,25 @@ namespace UdemiyIdentitiy.Controllers
 
                 //identityResult.IsLockedOut;
                 //identityResult.IsNotAllowed(ikiadılıdoğrulamada kullanılır) gibi durumlar dönebilri
-                var identityResult=   await _signInManager.PasswordSignInAsync(model.UserName,model.Password,model.RememberMe,false);
+                var identityResult=   await _signInManager.PasswordSignInAsync(model.UserName,model.Password,model.RememberMe,true);
+
+                if (identityResult.IsLockedOut)
+                {
+                    ModelState.AddModelError("","Beş kere yanlış girdiğiniz için hesaabınız kilitlenmiştir");
+                    return View("Index",model);
+;                }
+
 
                 if (identityResult.Succeeded)
                 {
                     return RedirectToAction("Index","Panel");
                 }
-                
-                ModelState.AddModelError("","Kullanıcı adı veya şifre hatalı");
 
-                ;
+                var yanlisGirilmeSayisi = await _userManager.GetAccessFailedCountAsync(await _userManager.FindByNameAsync(model.UserName) );
+
+                ModelState.AddModelError("",$"Kullanıcı adı veya şifre {5-yanlisGirilmeSayisi} kadar yanlis gireseniz şifreniz kilitlenir");
+
+                
 
 
             }
