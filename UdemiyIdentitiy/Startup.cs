@@ -24,6 +24,9 @@ namespace UdemiyIdentitiy
                 opt.Password.RequiredLength = 1;
                 opt.Password.RequireNonAlphanumeric = false;
                 opt.Password.RequireUppercase = false;
+
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+                opt.Lockout.MaxFailedAccessAttempts = 3;
             
             
             }).AddEntityFrameworkStores<UdemiyContext>();

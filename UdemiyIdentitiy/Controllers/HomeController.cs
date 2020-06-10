@@ -38,7 +38,12 @@ namespace UdemiyIdentitiy.Controllers
 
                 if (identityResult.IsLockedOut)
                 {
-                    ModelState.AddModelError("","Beş kere yanlış girdiğiniz için hesaabınız kilitlenmiştir");
+                    var gelen = await _userManager.GetLockoutEndDateAsync(await _userManager.FindByNameAsync(model.UserName));
+                    var kisitlanmisSure = gelen.Value;
+                    var kalanDakika = kisitlanmisSure.Minute- DateTime.Now.Minute;
+
+
+                    ModelState.AddModelError("",$"5 kere yanlış girdiğiniz için hesaabınız kilitlenmiştir. Kalan Dakika{kalanDakika}");
                     return View("Index",model);
 ;                }
 
