@@ -4,36 +4,44 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <table>
+    <div class="row">
 
-        <tr>
-            <th>  İsim  </th>
-            <td>  @Model.Name  </td>
+        <div class="col-md-8">
 
-        </tr>
-        <tr>
-            <th> Soyisim   </th>
-            <td>  @Model.SurName   </td>
+            <table>
 
-        </tr>
-        <tr>
-            <th>  Email  </th>
-            <td>  @Model.Email   </td>
+                <tr>
+                    <th>  İsim  </th>
+                    <td>  @Model.Name  </td>
 
-        </tr>
+                </tr>
+                <tr>
+                    <th> Soyisim   </th>
+                    <td>  @Model.SurName   </td>
 
-        <tr>
-            <th>  Telefon  </th>
-            <td>  @Model.PhoneNumber   </td>
+                </tr>
+                <tr>
+                    <th>  Email  </th>
+                    <td>  @Model.Email   </td>
 
-        </tr>
+                </tr>
 
-        <tr>
-            <th>  Resim  </th>
-            <td>  @Model.PictureUrl   </td>
+                <tr>
+                    <th>  Telefon  </th>
+                    <td>  @Model.PhoneNumber   </td>
 
-        </tr>
+                </tr>
 
-       
-    </table>
+                
 
+
+            </table>
+        </div>
+
+        <div class="col-md-4">
+
+            <img src="~/img/@Model.PictureUrl" alt="" class="w-100 img-fluid img-thumbnail"    />
+
+
+        </div>
+    </div>

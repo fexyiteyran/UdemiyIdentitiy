@@ -1,0 +1,64 @@
+﻿@model UdemiyIdentitiy.Models.UserUpdateViewModel
+
+@{
+    ViewData["Title"] = "UpdateUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="UpdateUser"  class="w-75 mx-auto p-4 mt-3 shadow" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SurName" class="control-label"></label>
+                <input asp-for="SurName" class="form-control" />
+                <span asp-validation-for="SurName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="control-label"> Bir oncekiresminiz</label>
+
+
+                        <img src="~/img/@Model.PuctureUrl" alt="@Model.Name" class="w-100 img-fluid" />
+                    </div>
+
+                    <div class="col-md-8">
+                        
+                        <input type="file"  asp-for="@Model.Picture" value="" />
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger">   </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
