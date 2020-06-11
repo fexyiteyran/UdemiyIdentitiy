@@ -30,10 +30,14 @@ namespace UdemiyIdentitiy
                 //opt.Lockout.MaxFailedAccessAttempts = 3;
             
             
-            }).AddErrorDescriber<CustomIdentityValidator>().AddPasswordValidator<CustomPasswordValidator>().AddEntityFrameworkStores<UdemiyContext>();
+            }).AddErrorDescriber<CustomIdentityValidator>()
+            .AddPasswordValidator<CustomPasswordValidator>()
+            .AddEntityFrameworkStores<UdemiyContext>();
 
             services.ConfigureApplicationCookie(opt => {
-
+               
+                //default Acount/Login ama biz deðiþtiriyoruz
+                opt.LoginPath = new PathString("/Home/Index");
                 opt.Cookie.HttpOnly = true;
                 opt.Cookie.Name = "UdemiyCookie";
                 opt.Cookie.SameSite = SameSiteMode.Strict;
@@ -55,6 +59,8 @@ namespace UdemiyIdentitiy
 
             app.UseRouting();
             app.UseStaticFiles();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
