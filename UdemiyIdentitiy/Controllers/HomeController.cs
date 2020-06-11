@@ -49,6 +49,12 @@ namespace UdemiyIdentitiy.Controllers
                     return View("Index",model);
 ;                }
 
+                if (identityResult.IsNotAllowed)
+                {
+                    ModelState.AddModelError("", "Email adresinizi doğrulayınız");
+                    return View("Index", model);
+                }
+
 
                 if (identityResult.Succeeded)
                 {
