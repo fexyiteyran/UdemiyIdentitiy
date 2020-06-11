@@ -35,11 +35,11 @@ namespace UdemiyIdentitiy.CustomValidator
             return new IdentityError()
             {
                 Code = "DuplicateUserName",
-                Description = $";lgili kullanıcı adı({userName}) zaten sistemde var"
+                Description = $"ilgili kullanıcı adı({userName}) zaten sistemde var"
 
             };
         }
-
+         
 
     }
 }

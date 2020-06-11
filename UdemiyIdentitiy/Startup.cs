@@ -30,7 +30,7 @@ namespace UdemiyIdentitiy
                 //opt.Lockout.MaxFailedAccessAttempts = 3;
             
             
-            }).AddErrorDescriber<CustomIdentityValidator>().AddEntityFrameworkStores<UdemiyContext>();
+            }).AddErrorDescriber<CustomIdentityValidator>().AddPasswordValidator<CustomPasswordValidator>().AddEntityFrameworkStores<UdemiyContext>();
 
             services.ConfigureApplicationCookie(opt => {
 
