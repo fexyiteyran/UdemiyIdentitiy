@@ -1,8 +1,39 @@
-﻿
+﻿@model AppUser
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+    <table>
+
+        <tr>
+            <th>  İsim  </th>
+            <td>  @Model.Name  </td>
+
+        </tr>
+        <tr>
+            <th> Soyisim   </th>
+            <td>  @Model.SurName   </td>
+
+        </tr>
+        <tr>
+            <th>  Email  </th>
+            <td>  @Model.Email   </td>
+
+        </tr>
+
+        <tr>
+            <th>  Telefon  </th>
+            <td>  @Model.PhoneNumber   </td>
+
+        </tr>
+
+        <tr>
+            <th>  Resim  </th>
+            <td>  @Model.PictureUrl   </td>
+
+        </tr>
+
+       
+    </table>
 

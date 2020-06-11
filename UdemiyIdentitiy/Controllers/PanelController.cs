@@ -19,9 +19,11 @@ namespace UdemiyIdentitiy.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task< IActionResult> Index()
         {
-            return View();
+
+           var user=await  _userManager.FindByNameAsync(User.Identity.Name);
+            return View(user);
         }
         //herkes erişsin istiyorsak bunu yazarız
         [AllowAnonymous]
