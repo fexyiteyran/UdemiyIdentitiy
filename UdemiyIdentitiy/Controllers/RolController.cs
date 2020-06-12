@@ -60,5 +60,40 @@ namespace UdemiyIdentitiy.Controllers
             return View(model);
         }
 
+       public async  Task<IActionResult> UpdateRole(int id)
+        {
+          var rol=  _roleManager.Roles.FirstOrDefault(o=>o.Id==id);
+
+
+            RoleUpdateViewModel model = new RoleUpdateViewModel
+            {
+                Id=rol.Id,
+                Name=rol.Name
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> UpdateRole(RoleUpdateViewModel model)
+        {
+            var tobeUpdateRole = _roleManager.Roles.FirstOrDefault(I=>I.Id== model.Id);
+            tobeUpdateRole.Name = model.Name;
+             var identityResult=  await _roleManager.UpdateAsync(tobeUpdateRole);
+            if (identityResult.Succeeded)
+            {
+                return RedirectToAction("Index");
+            }
+
+            foreach (var error in identityResult.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
+
+            return View(model);
+        
+        }
+
     }
 }

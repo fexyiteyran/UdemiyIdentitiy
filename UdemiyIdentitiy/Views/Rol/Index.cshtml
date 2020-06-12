@@ -4,37 +4,40 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <a asp-action="AddRole" asp-controller="Rol" class="btn btn-info btn-sm my-2">Yeni Rol Ekle</a>
-    <table>
+<a asp-action="AddRole" asp-controller="Rol" class="btn btn-info btn-sm my-2">Yeni Rol Ekle</a>
+<table class="table">
 
-        <tr>
-
-
-            <td>    Ad</td>
-        </tr>
-
-        @if (Model.Count > 0)
-        {
-            foreach (var item in Model)
-            {
-                <tr>
+    <tr>
 
 
-                    <td> @item.Name</td>
-                </tr>
-            }
-        }
-        else
+        <td>    Ad</td>
+        <td>    İşlem</td>
+    </tr>
+
+    @if (Model.Count > 0)
+    {
+        foreach (var item in Model)
         {
             <tr>
 
 
-                <td> Kayıtlı rol bulunmamaktadır</td>
+                <td> @item.Name</td>
+
+                <td>   <a asp-action="UpdateRole" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Düzenle</a> </td>
             </tr>
         }
-        
+    }
+    else
+    {
+        <tr>
+
+
+            <td> Kayıtlı rol bulunmamaktadır</td>
+        </tr>
+    }
 
 
 
-    </table>
+
+</table>
 
