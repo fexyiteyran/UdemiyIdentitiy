@@ -15,10 +15,11 @@ namespace UdemiyIdentitiy.Controllers
     public class RolController : Controller
     {
         private readonly RoleManager<AppRole> _roleManager;
-
-        public RolController(RoleManager<AppRole> roleManager)
+        private readonly UserManager<AppUser> _userManager;
+        public RolController(RoleManager<AppRole> roleManager, UserManager<AppUser> userManager)
         {
-               _roleManager=roleManager; 
+               _roleManager=roleManager;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -94,6 +95,29 @@ namespace UdemiyIdentitiy.Controllers
             return View(model);
         
         }
+
+
+        public async Task<IActionResult> DeleteRole(int id)
+        {
+            var tobeDeleteeRole = _roleManager.Roles.FirstOrDefault(I => I.Id == id);
+           var identitiyResult=   await _roleManager.DeleteAsync(tobeDeleteeRole);
+            if (identitiyResult.Succeeded)
+            {
+                return RedirectToAction("Index");
+            }
+            TempData["Errors"] = identitiyResult.Errors;
+            return View(tobeDeleteeRole);
+        }
+
+
+        
+
+             public async Task<IActionResult> UserList(int id)
+           {
+            
+            return View(_userManager.Users.ToList());
+          }
+
 
     }
 }
