@@ -18,7 +18,7 @@ namespace UdemiyIdentitiy.Controllers
         private readonly UserManager<AppUser> _userManager;
         public RolController(RoleManager<AppRole> roleManager, UserManager<AppUser> userManager)
         {
-               _roleManager=roleManager;
+            _roleManager = roleManager;
             _userManager = userManager;
         }
 
@@ -61,15 +61,15 @@ namespace UdemiyIdentitiy.Controllers
             return View(model);
         }
 
-       public async  Task<IActionResult> UpdateRole(int id)
+        public async Task<IActionResult> UpdateRole(int id)
         {
-          var rol=  _roleManager.Roles.FirstOrDefault(o=>o.Id==id);
+            var rol = _roleManager.Roles.FirstOrDefault(o => o.Id == id);
 
 
             RoleUpdateViewModel model = new RoleUpdateViewModel
             {
-                Id=rol.Id,
-                Name=rol.Name
+                Id = rol.Id,
+                Name = rol.Name
             };
 
             return View(model);
@@ -79,9 +79,9 @@ namespace UdemiyIdentitiy.Controllers
 
         public async Task<IActionResult> UpdateRole(RoleUpdateViewModel model)
         {
-            var tobeUpdateRole = _roleManager.Roles.FirstOrDefault(I=>I.Id== model.Id);
+            var tobeUpdateRole = _roleManager.Roles.FirstOrDefault(I => I.Id == model.Id);
             tobeUpdateRole.Name = model.Name;
-             var identityResult=  await _roleManager.UpdateAsync(tobeUpdateRole);
+            var identityResult = await _roleManager.UpdateAsync(tobeUpdateRole);
             if (identityResult.Succeeded)
             {
                 return RedirectToAction("Index");
@@ -93,14 +93,15 @@ namespace UdemiyIdentitiy.Controllers
             }
 
             return View(model);
-        
+
         }
 
 
         public async Task<IActionResult> DeleteRole(int id)
         {
             var tobeDeleteeRole = _roleManager.Roles.FirstOrDefault(I => I.Id == id);
-           var identitiyResult=   await _roleManager.DeleteAsync(tobeDeleteeRole);
+           
+            var identitiyResult = await _roleManager.DeleteAsync(tobeDeleteeRole);
             if (identitiyResult.Succeeded)
             {
                 return RedirectToAction("Index");
@@ -110,14 +111,66 @@ namespace UdemiyIdentitiy.Controllers
         }
 
 
-        
 
-             public async Task<IActionResult> UserList(int id)
-           {
-            
+
+        public async Task<IActionResult> UserList(int id)
+        {
+
             return View(_userManager.Users.ToList());
-          }
+        }
 
+
+
+        public async Task<IActionResult> AssignRole(int id)
+        {
+
+            var user = _userManager.Users.FirstOrDefault(I => I.Id == id);
+            TempData["UsrId"] = user.Id;
+           var roles = _roleManager.Roles.ToList();
+            var userRoles = await _userManager.GetRolesAsync(user);
+            List<RoleAsignViewModel> models = new List<RoleAsignViewModel>();
+            foreach (var item in roles)
+            {
+                RoleAsignViewModel model = new RoleAsignViewModel();
+                model.RoleId = item.Id;
+                model.Name = item.Name;
+                model.Exist = userRoles.Contains(item.Name);
+                models.Add(model);
+            }
+
+            return View(models);
+
+
+
+        }
+        [HttpPost]
+        public async Task<IActionResult> AssignRole(List<RoleAsignViewModel>  models)
+
+        {
+            var userId = (int)TempData["UsrId"];
+
+            var user = _userManager.Users.FirstOrDefault(I=>I.Id==userId);
+            foreach (var item in models)
+            {
+
+
+                if (item.Exist)
+                {
+                    await _userManager.AddToRoleAsync(user, item.Name);
+                }
+                else
+                {
+                    await _userManager.RemoveFromRoleAsync(user, item.Name);
+
+
+                }
+
+            }
+
+
+
+            return RedirectToAction("UserList");
+        }
 
     }
 }
