@@ -16,10 +16,12 @@ namespace UdemiyIdentitiy.Controllers
       [Authorize]
     public class PanelController : Controller
     {
+        private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
-        public PanelController(UserManager<AppUser> userManager)
+        public PanelController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public async Task< IActionResult> Index()
@@ -90,5 +92,16 @@ namespace UdemiyIdentitiy.Controllers
         {
             return View();
         }
+
+
+
+        public async Task<IActionResult> LogOut()
+        {
+
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index","Home");
+        }
+
+
     }
 }

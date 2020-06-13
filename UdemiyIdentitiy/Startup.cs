@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -37,7 +37,7 @@ namespace UdemiyIdentitiy
 
             services.ConfigureApplicationCookie(opt => {
                
-                //default Acount/Login ama biz de�i�tiriyoruz
+                //default Acount/Login ama biz deðiþtiriyoruz
                 opt.LoginPath = new PathString("/Home/Index");
                 opt.AccessDeniedPath= new PathString("/Home/AccsessDenied");
                 opt.Cookie.HttpOnly = true;
@@ -47,7 +47,7 @@ namespace UdemiyIdentitiy
                 opt.ExpireTimeSpan = TimeSpan.FromDays(20);
             
             });
-
+            //cliam bazlı yetkilndirme ilşlemi
             services.AddAuthorization(opt => 
             { opt.AddPolicy("FemaliPoliciy",
                 cnf => 
