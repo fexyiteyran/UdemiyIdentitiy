@@ -39,6 +39,7 @@ namespace UdemiyIdentitiy
                
                 //default Acount/Login ama biz deðiþtiriyoruz
                 opt.LoginPath = new PathString("/Home/Index");
+                opt.AccessDeniedPath= new PathString("/Home/AccsessDenied");
                 opt.Cookie.HttpOnly = true;
                 opt.Cookie.Name = "UdemiyCookie";
                 opt.Cookie.SameSite = SameSiteMode.Strict;

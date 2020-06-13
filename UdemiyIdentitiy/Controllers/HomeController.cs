@@ -121,6 +121,13 @@ namespace UdemiyIdentitiy.Controllers
 
             return View();
         }
+        public IActionResult AccsessDenied()
+        {
+
+            return View();
+        }
+
+        
 
     }
 }
