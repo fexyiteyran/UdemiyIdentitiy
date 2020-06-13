@@ -48,6 +48,12 @@ namespace UdemiyIdentitiy
             
             });
 
+            services.AddAuthorization(opt => 
+            { opt.AddPolicy("FemaliPoliciy",
+                cnf => 
+                { cnf.RequireClaim("gender", "female");
+                });
+            });
              services.AddControllersWithViews();
         }
 
