@@ -12,7 +12,7 @@ using UdemiyIdentitiy.Models;
 
 namespace UdemiyIdentitiy.Controllers
 {
-
+    [AutoValidateAntiforgeryToken]
       [Authorize]
     public class PanelController : Controller
     {
@@ -48,6 +48,8 @@ namespace UdemiyIdentitiy.Controllers
 
 
         [HttpPost]
+
+      
         public async Task<IActionResult> UpdateUser(UserUpdateViewModel model)
         {
             if (ModelState.IsValid)
